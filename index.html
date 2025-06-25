@@ -3,46 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calcular Média</title>
+    <title>Calculadora de Notas</title>
     <style>
-        body{
-            background-color: rgb(213,250,221);
-            color: rgb(47,72,88);
+        body {
+            background-color: rgb(106, 106, 224);
+            color: white;
             font: normal 20pt Arial;
             text-align: center;
+            padding: 50px;
         }
-        form[type="number"]{
-            padding: 20px;
-            margin: 10px;
+
+        h1 {
+            color: blanchedalmond;
+        }
+
+        form {
+            margin: 20px auto;
             display: inline-block;
-            border-radius: 20px;
-            background-color: rgba(255,255,255, 0.1);
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
         }
-        input{
 
+        input[type="number"] {
+            padding: 10px;
+            font-size: 16pt;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+            width: 100px;
         }
-        button{
 
+        button {
+            padding: 10px 20px;
+            font-size: 16pt;
+            border: none;
+            border-radius: 5px;
+            background-color: blanchedalmond;
+            color: black;
+            cursor: pointer;
+        }
+
+        #resultado {
+            margin-top: 30px;
+            font-size: 22pt;
+        }
+
+        img {
+            display: block;
+            margin: 0 auto 20px;
+            max-width: 200px;
         }
     </style>
 </head>
 <body>
-    <img src="logo.png" alt="LogoTipo da escola cedup hh">
-    <h1>CEDUP HERMMAN HERING</h1>
-    <p>Média dos Estudantes</p>
+    <img src="logo.png" alt="Logo do site">
+
+    <h1>Calculadora de Média</h1>
 
     <form id="formNotas">
-       <input type="number" id="nota1" placeholder="Nota1" step="0.01" required>
-       <input type="number" id="nota2" placeholder="Nota2" step="0.01" required> 
-       <input type="number" id="nota3" placeholder="Nota3" step="0.01" required>
-       <br>
-       <button type="submit">CALCULAR!</button>
+        <input type="number" id="nota1" placeholder="Nota 1" step="0.01" required>
+        <input type="number" id="nota2" placeholder="Nota 2" step="0.01" required>
+        <input type="number" id="nota3" placeholder="Nota 3" step="0.01" required>
+        <br>
+        <button type="submit">Calcular Média</button>
     </form>
 
     <p id="resultado"></p>
 
     <script>
-        
+        const form = document.getElementById("formNotas");
+        const resultado = document.getElementById("resultado");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault(); // Impede recarregamento da página
+
+            const n1 = parseFloat(document.getElementById("nota1").value);
+            const n2 = parseFloat(document.getElementById("nota2").value);
+            const n3 = parseFloat(document.getElementById("nota3").value);
+
+            if (isNaN(n1) || isNaN(n2) || isNaN(n3)) {
+                resultado.innerHTML = "Por favor, preencha todas as notas corretamente.";
+                return;
+            }
+
+            const media = (n1 + n2 + n3) / 3;
+            resultado.innerHTML = `A média do estudante é <strong>${media.toFixed(2)}</strong>.`;
+        });
     </script>
 </body>
 </html>
